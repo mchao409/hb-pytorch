@@ -19,15 +19,19 @@ namespace native {
   // return out;
   }
 
-  Tensor& eye_out_hb(Tensor& out, long n, long m) {
+  Tensor& eye_out_hb(Tensor& output, long n, long m) {
     std::vector<eva_t> device_args;
     std::vector<eva_t> device_ptrs;
-    auto output_t = at::empty(
-                   {n,m}, out.options());
-  c10::hammerblade::offload_kernel("tensorlib_eye", device_args);
-  // cleanup_device(device_args, device_ptrs);
-  //  eye.out(int n, *, Tensor(a!) out) -> Tensor(a!)
-  return out;
+    output.resize_({n,m});
+    // Tensor output = at::empty(
+    //                {n,m}, input.options());
+    device_args.push_back(create_device_tensor(output, device_ptrs));
+    device_args.push_back(create_device_scalar(n));
+    device_args.push_back(create_device_scalar(m));
+    c10::hammerblade::offload_kernel("tensorlib_eye", device_args);
+    cleanup_device(device_args, device_ptrs);
+    //  eye.out(int n, *, Tensor(a!) out) -> Tensor(a!)
+    return output;
   }
 
 }}

@@ -7,5 +7,5 @@ import torch
 torch.manual_seed(42)
 
 def test_torch():
-  torch.eye(3,3, device=torch.device("hammerblade"))
+  assert torch.allclose(torch.eye(3,3), torch.eye(3,3, device=torch.device("hammerblade")).cpu())
 
