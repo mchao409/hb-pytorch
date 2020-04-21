@@ -1159,13 +1159,13 @@
   dispatch:
     CPU: eye_out_cpu
     CUDA: eye_out_cuda
-    Hammerblade: eye_out_hb
+    HammerBlade: eye_out_hb
 
 - func: eye.m_out(int n, int m, *, Tensor(a!) out) -> Tensor(a!)
   dispatch:
     CPU: eye_out_cpu
     CUDA: eye_out_cuda
-    Hammerblade: eye_out_hb
+    HammerBlade: eye_out_hb
 
 - func: flatten.using_ints(Tensor self, int start_dim=0, int end_dim=-1) -> Tensor
   use_c10_dispatcher: full

@@ -6,5 +6,6 @@ import torch
 
 torch.manual_seed(42)
 
-def _test_torch_eye_check(x):
-  pass
+def test_torch():
+  torch.eye(3,3, device=torch.device("hammerblade"))
+
