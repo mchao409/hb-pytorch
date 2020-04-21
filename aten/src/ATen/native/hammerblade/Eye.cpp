@@ -23,6 +23,9 @@ namespace native {
     std::vector<eva_t> device_args;
     std::vector<eva_t> device_ptrs;
     output.resize_({n,m});
+    if(m == -1) {
+      m = n;
+    }
     // Tensor output = at::empty(
     //                {n,m}, input.options());
     device_args.push_back(create_device_tensor(output, device_ptrs));

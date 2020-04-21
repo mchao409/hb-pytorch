@@ -4,8 +4,26 @@ Tests on torch.eye (identity kernel)
 """
 import torch
 
-torch.manual_seed(42)
+def _test_torch_eye_square(n):
+  assert torch.allclose(torch.eye(n), torch.eye(n, device=torch.device("hammerblade")).cpu())
 
-def test_torch():
-  assert torch.allclose(torch.eye(3,3), torch.eye(3,3, device=torch.device("hammerblade")).cpu())
+def _test_torch_eye(n,m):
+  assert torch.allclose(torch.eye(n,m), torch.eye(n,m, device=torch.device("hammerblade")).cpu())
 
+def test_torch_eye_1():
+  _test_torch_eye_square(4)
+
+def test_torch_eye_2():
+  _test_torch_eye_square(1)
+
+def test_torch_eye_3():
+  _test_torch_eye_square(16)
+
+def test_torch_eye_4():
+  _test_torch_eye(3,4)
+
+def test_torch_eye_5():
+  _test_torch_eye(4,1)
+
+def test_torch_eye_6():
+  _test_torch_eye(3,3)
