@@ -388,6 +388,7 @@
   dispatch:
     CPU: arange_cpu_out
     CUDA: arange_cuda_out
+    HammerBlade: arange_out_hb
 
 # This function is a temporary hack to allow tracing of arange like constructs with dynamic
 # bounds on arange.  Normal arange is not traceable because it does not take any tensor inputs;
